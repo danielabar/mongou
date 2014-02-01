@@ -1,0 +1,11 @@
+90 is EAst
+
+180 is South
+
+270 is West
+
+360 is North
+
+Which state recorded the lowerst temperature
+when the wind was coming from the West?
+(i.e. Wind Direction between 180 and 360)

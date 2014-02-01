@@ -1,0 +1,27 @@
+{
+  "name": "hw3-1",
+  "version": "0.0.1",
+  "description": "MongoDB University M101JS Homework Assignment 3-1",
+  "main": "app.js",
+  "dependencies": {
+    "underscore": "~1.5.2",
+    "mongodb": "~1.3.23",
+    "consolidate": "~0.10.0",
+    "express": "~3.4.7",
+    "request": "~2.33.0",
+    "swig": "~1.2.2"
+  },
+  "devDependencies": {
+    "mocha": "~1.17.1",
+    "chai": "~1.9.0"
+  },
+  "scripts": {
+    "test": "mocha test -R spec --recursive"
+  },
+  "keywords": [
+    "mongo",
+    "node"
+  ],
+  "author": "Daniela Baron",
+  "license": "MIT"
+}

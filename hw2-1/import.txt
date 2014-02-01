@@ -1,0 +1,6 @@
+mongoimport -d weather -c data --type csv --headerline weather_data.csv
+
+Importing csv data
+--type csv
+--headerline tells mongo that first line in csv is header record, will set all the field names accordingly
+

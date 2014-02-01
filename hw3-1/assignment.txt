@@ -1,0 +1,36 @@
+Initialize database:
+mongoimport -d school -c students --drop < students.json
+
+Assignment:
+Remove lowest homework score from each student
+
+Sample student doc:
+{
+	"_id" : 100,
+	"name" : "Demarcus Audette",
+	"scores" : [
+    {
+      "type" : "exam",
+      "score" : 47.42608580155614
+    },
+    {
+      "type" : "quiz",
+      "score" : 44.83416623719906
+    },
+    {
+      "type" : "homework",
+      "score" : 19.85604968544429
+    },
+    {
+      "type" : "homework",
+      "score" : 39.01726616178844
+    }
+	]
+}
+
+Verify in monogo shell:
+db.students.count()
+--> expect 200
+
+Student with highest average in class (run after lowest homework score dropped)
+db.students.aggregate({'$unwind':'$scores'},{'$group':{'_id':'$_id', 'average':{$avg:'$scores.score'}}}, {'$sort':{'average':-1}}, {'$limit':1})
