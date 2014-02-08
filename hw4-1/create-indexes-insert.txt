@@ -1,0 +1,9 @@
+db.products.ensureIndex({sku:1},{unique:true});
+db.products.ensureIndex({price:-1});
+db.products.ensureIndex({description:1});
+db.products.ensureIndex({category:1,brand:1});
+db.products.ensureIndex({'reviews.author':1});
+
+db.products.insert({sku:'A',price:35,description:'A desc',category:'book',brand:'GE',reviews:[{author:'john',comment:'good'},{author:'jane',comment:'bad'}]});
+db.products.insert({sku:'B',price:55,description:'B desc',category:'fridge',brand:'GE',reviews:[{author:'john',comment:'good'},{author:'jane',comment:'bad'}]});
+db.products.insert({sku:'C',price:45,description:'C desc',category:'electronics',brand:'Samsung',reviews:[{author:'sam',comment:'great'},{author:'jane',comment:'ok'}]});
