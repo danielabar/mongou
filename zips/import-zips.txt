@@ -1,0 +1,1 @@
+mongoimport -d zips -c zip --drop < zips.json
