@@ -1,0 +1,22 @@
+{
+  "name": "week7",
+  "private": true,
+  "version": "0.0.1",
+  "description": "m101js blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mongodb",
+    "nosql",
+    "blog"
+  ],
+  "author": "Daniela Baron",
+  "license": "MIT",
+  "dependencies": {
+    "mongoose": "~3.8.8",
+    "express": "~3.4.8",
+    "jade": "~1.1.5"
+  }
+}
