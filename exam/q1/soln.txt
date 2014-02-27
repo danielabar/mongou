@@ -1,0 +1,23 @@
+Calculate the number of messages sent 
+"From" 	andrew.fastow@enron.com
+"To" 	jeff.skilling@enron.com
+
+Reference: Number of email messages = 1
+From:	andrew.fastow@enron.com 
+To: 	john.lavorato@enron.com 
+
+1. Reduce number of documents: 
+	$match "From" = andrew.fastow@enron.com
+
+2. $unwind "To" field to get doc for each recipient
+
+3. $match "To" (unwound now) = jeff.skilling@enron.com
+
+4. $group:null with $sum:1 to count all docs
+
+use enron
+db.messages.aggregate([
+	{$match:
+		{From:"andrew.fastow@enron.com"}
+	}
+])
