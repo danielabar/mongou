@@ -1,0 +1,7 @@
+Add "mrpotatohead@mongodb.com"
+To list of addresses in the "headers.To" array
+For document with "headers.Message-ID" of "<8147308.1075851042335.JavaMail.evans@thyme>"
+
+db.messages.find({"headers.Message-ID" : "<8147308.1075851042335.JavaMail.evans@thyme>"}).pretty()
+
+db.messages.update( { "headers.Message-ID" : "<8147308.1075851042335.JavaMail.evans@thyme>" }, { $push : { "headers.To" : "mrpotatohead@mongodb.com" } } );

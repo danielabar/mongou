@@ -1,0 +1,31 @@
+{
+  "_id" : ObjectId("123ABC"),
+  "body" : "blah blah blah...",
+  "headers" : {
+    "From" : "andrew.fastow@enron.com",
+    "To" : [
+      "jeff.skilling@enron.com",
+      "joe.schmoe@enron.com",
+      "jeff.skilling@enron.com"
+    ],
+    "Subject" : "read this now"
+  }
+}
+
+db.messages.count({"headers.From":"susan.mara@enron.com", "headers.To":"jeff.dasovich@enron.com"})
+// 750
+
+db.messages.count({"headers.From":"susan.mara@enron.com", "headers.To":"richard.shapiro@enron.com"})
+// 616
+
+db.messages.count({"headers.From":"soblander@carrfut.com", "headers.To":"soblander@carrfut.com"})
+// 679
+
+db.messages.count({"headers.From":"susan.mara@enron.com", "headers.To":"james.steffes@enron.com"})
+// 646
+
+db.messages.count({"headers.From":"evelyn.metoyer@enron.com", "headers.To":"kate.symes@enron.com"})
+// 567
+
+db.messages.count({"headers.From":"susan.mara@enron.com", "headers.To":"alan.comnes@enron.com"})
+// 550
