@@ -1,0 +1,1 @@
+mongoimport -d blog -c posts --type json --drop posts.json

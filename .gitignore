@@ -19,3 +19,4 @@ node_modules/
 dist/
 
 dump
+posts.json
