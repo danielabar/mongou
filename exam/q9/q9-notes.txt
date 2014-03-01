@@ -1,0 +1,21 @@
+patient collection
+{
+	patient_id : 1,
+	first_name : 'Bart',
+	last_name : 'Simpson',
+	primary_physician : 'Dr. Jones'
+	records : [100, 101, 102...]
+}
+
+record collection
+{
+	_id : 100,
+	patient_id : 1,	
+	procedure : 'chest x-ray',
+	outcome : 'all clear'
+	created_timestamp : 2014-01-27 09:15:32
+}
+
+Most common operations that this systems needs to perform day in and day out:
+- add a record for an existing patient
+- update a record for an existing patient
