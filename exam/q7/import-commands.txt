@@ -1,0 +1,2 @@
+mongoimport -d photoshare -c albums --type json --drop albums.json
+mongoimport -d photoshare -c images --type json --drop images.json

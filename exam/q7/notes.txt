@@ -1,0 +1,6 @@
+Create index on albums.images -> multikey = true
+  db.albums.ensureIndex( { 'images' : 1 } );
+
+find all images -> use cursor
+for each image._id, find albums that contain it: db.albums.find( {images : image._id} )
+  if number of albums === 0, delete image by _id from images collection
