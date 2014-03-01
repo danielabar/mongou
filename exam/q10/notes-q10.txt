@@ -1,0 +1,26 @@
+--------------------------------------------------------------------------------------------------------
+> db.messages.count()
+120477
+--------------------------------------------------------------------------------------------------------
+
+db.messages
+	.find
+	(
+		{'headers.Date':{'$gt': new Date(2001,3,1)}},	// Find where headers.Date > 2001-03-01
+		{'headers.From':1, _id:0}						// Projection: Only display headers.From in results
+	)
+	.sort
+	(
+		{'headers.From':1} 								// Sort by headers.From ascending
+	)
+	.explain()
+--------------------------------------------------------------------------------------------------------
+
+"cursor" : "BtreeCursor headers.From_1",				// Used index 'headers.From_1'
+"isMultiKey" : false,									// 'headers.From_1' is NOT a multi-key index
+"n" : 83057,											// Returned 83057 documents
+"nscannedObjects" : 120477,								// Number of documents scanned to find results
+"nscanned" : 120477,									// Looked at 120477 index entries to find results
+"scanAndOrder" : false,									// Query used order of docs in index to return sorted results
+"indexOnly" : false,									// Query could NOT be satisfied by the index alone
+"millis" : 250,											// Query returned in 250 milliseconds
