@@ -7,6 +7,8 @@ html
       h1= pageTitle
     section.login
       ul
+        li
+          a(href="/") Home
         if session && session.isLoggedIn
           li
             a(href="/logout") Logout
