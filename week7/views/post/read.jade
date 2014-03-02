@@ -3,7 +3,9 @@ extends ../layout
 block content
   p
     a(href="/") Home
-  if !(title)
-    p Sorry can't find that post
+  if !(post)
+    p Sorry, post not found
   else
-    h2=title
+    h2=post.title
+    h3=post.author
+    p=post.body

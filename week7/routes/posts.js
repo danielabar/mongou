@@ -34,7 +34,8 @@ module.exports = function(app) {
         return res.redirect('/');
       }
       if(blogpost) {
-        return res.render('post/read.jade', {title : blogpost.title});
+        console.log('putting blogpost in view: ' + JSON.stringify(blogpost, null, 2));
+        return res.render('post/read.jade', {post : blogpost});
       }
     });
   });
