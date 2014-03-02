@@ -1,5 +1,6 @@
 var errors = require('./errors');
 var login = require('./login');
+var posts = require('./posts');
 
 module.exports = function(app) {
 
@@ -8,8 +9,11 @@ module.exports = function(app) {
     res.render('home.jade');
   });
 
-  // login / logout routes
+  // login and logout
   login(app);
+
+  // posts
+  posts(app);
 
   // error handlers
   errors(app);

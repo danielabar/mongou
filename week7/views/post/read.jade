@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+  p
+    a(href="/") Home
+  if !(title)
+    p Sorry can't find that post
+  else
+    h2=title
