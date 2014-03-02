@@ -1,13 +1,25 @@
 extends ../layout
 
 block content
-  form(method="post", action="/post/create")
-    ul
-      li
-        label(for="title") Title
-        input#title(name="title")
-      li
-        label(for="body") Body
-        textarea#body(name="body")
-      li
-        input(type="submit", value="Save")
+  if post
+    form(method="post", action="/post/edit/" + post.id)
+      ul
+        li
+          label(for="title") Title
+          input#title(name="title", value=post.title)
+        li
+          label(for="body") Body
+          textarea#body(name="body")=post.body
+        li
+          input(type="submit", value="Save Changes")
+  else
+    form(method="post", action="/post/create")
+      ul
+        li
+          label(for="title") Title
+          input#title(name="title")
+        li
+          label(for="body") Body
+          textarea#body(name="body")
+        li
+          input(type="submit", value="Crate")

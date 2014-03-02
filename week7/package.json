@@ -18,6 +18,7 @@
     "mongoose": "~3.8.8",
     "express": "~3.4.8",
     "jade": "~1.1.5",
-    "mongoose-lifecycle": "~1.0.0"
+    "mongoose-lifecycle": "~1.0.0",
+    "express-mongoose": "~0.1.0"
   }
 }

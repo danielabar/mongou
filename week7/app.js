@@ -1,6 +1,9 @@
 var mongoose = require('mongoose');
 var express = require('express');
 
+// add mongoose query and promise support to express
+require('express-mongoose');
+
 // models
 var user = require('./models/user');
 var blogpost = require('./models/blogpost');
@@ -12,11 +15,12 @@ var middleware = require('./middleware');
 // and load it. i.e. index.js is the default module
 var routes = require('./routes');
 
+mongoose.set('debug', true);
 mongoose.connect('mongodb://localhost/week7blog', function(err) {
 
   if (err) throw err;
 
-  console.log('connected');
+  console.log('connected to mongodb://localhost/week7blog');
 
   var app = express();
   middleware(app);

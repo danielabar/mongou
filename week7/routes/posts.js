@@ -39,7 +39,6 @@ module.exports = function(app) {
 
       if (!post) return next(); // 404
 
-      console.log('putting post in view: ' + JSON.stringify(post, null, 2));
       res.render('post/read.jade', { post: post});
     });
   });
@@ -65,4 +64,30 @@ module.exports = function(app) {
 
     });
   });
+
+  // update
+  // app.get('/post/edit/:id', loggedIn, function(req, res, next) {
+  //   // using express-mongoose that allows passing a mongoose promise to template rendering engine
+  //   res.render('post/create.jade', {
+  //     post: BlogPost.findById(req.param('id'))
+  //   });
+  // });
+
+  app.get('/post/edit/:id', loggedIn, function(req, res, next) {
+    var id = req.param('id');
+    BlogPost.findOne({ _id: id}, function(err, post) {
+      if (err) return next(err);
+      console.log('putting post in create as edit view: ' + JSON.stringify(post, null, 2));
+      res.render('post/create.jade', {post: post});
+    });
+  });
+
+  app.post('/post/edit/:id', loggedIn, function(req, res, next) {
+    // 'edit' is custom functionality defined in schema
+    BlogPost.edit(req, function(err) {
+      if (err) return next(err);
+      res.redirect('/post/' + req.param('id'));
+    });
+  });
+
 };
