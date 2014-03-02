@@ -9,7 +9,7 @@ module.exports = function(app) {
   // home page
   app.get('/', function(req, res, next) {
     // Use query builder interface to chain methods before execution
-    BlogPost.find().sort('created').limit(10).exec(function(err, posts) {
+    BlogPost.find().sort({'created' : -1}).limit(10).exec(function(err, posts) {
       if(err) return next(err);
       res.render('home.jade', { posts: posts});
     });

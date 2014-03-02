@@ -1,6 +1,7 @@
 var loggedIn = require('../middleware/loggedIn');
 var mongoose = require('mongoose');
 var BlogPost = mongoose.model('BlogPost');
+var Comment = mongoose.model('Comment');
 
 module.exports = function(app) {
 
@@ -27,19 +28,23 @@ module.exports = function(app) {
 
   // read
   app.get('/post/:id', function(req, res, next) {
+    var id = req.param('id');
 
-    // mongoose query builder - fluent interface
-    var query = BlogPost.findById(req.param('id'));
+    // findComments is a custom method
+    // calling exec without passing callback means this will return a promise
+    // mongoose is compatible with A+ promise spec
+    var promise = BlogPost.findComments(id)
+      .sort('created')
+      .select('_id') // special mongoose syntax to exclude properties
+      .exec();
 
-    // runs additional query to get data from related collections
-    // query.populate('author');
-
+    var query = BlogPost.findById(id).populate('author');
     query.exec(function(err, post) {
       if (err) return next(err);
-
       if (!post) return next(); // 404
-
-      res.render('post/read.jade', { post: post});
+      // pass the comments promise to view engine,
+      // express view will wait until promise is resolved before rendering view
+      res.render('post/read.jade', { post: post, comments: promise});
     });
   });
 
@@ -87,6 +92,24 @@ module.exports = function(app) {
     BlogPost.edit(req, function(err) {
       if (err) return next(err);
       res.redirect('/post/' + req.param('id'));
+    });
+  });
+
+  // comments
+  app.post('/post/comment/:id', loggedIn, function(req, res, next) {
+    var id = req.param('id');
+    var text = req.param('text');
+    var author = req.session.user;
+
+    Comment.create({
+      post: id,
+      text: text,
+      author: author
+    }, function(err, commnent) {
+      if (err) return next(err);
+
+      // TODO probably want to do this all with xhr, rather than refresh the whole page
+      res.redirect('/post/' + id);
     });
   });
 

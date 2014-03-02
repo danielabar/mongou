@@ -4,10 +4,23 @@ block content
   h2= post.title
   p= post.body
   span= post.created.toGMTString()
-  p By: #{post.author}
+  p By: #{post.author.fullname}
+  br
+  br
+  div
+    a(href="/post/edit/#{post.id}") Edit Post
+    &nbsp;|&nbsp;
+    a(href="/post/remove/#{post.id}") Delete Post
+  br
+  br
   if session.isLoggedIn
+      form(method='post', action="/post/comment/" + post.id)
+        textarea(name='text')
+        input(type='submit', value='Add Comment')
+  if comments
+    p Comments:
     ul
-      li
-        a(href="/post/edit/#{post.id}") Edit
-      li
-        a(href="/post/remove/#{post.id}") Delete
+      each comment in comments
+        li
+          p.text= comment.text
+          p.author= comment.author
