@@ -35,28 +35,34 @@ module.exports = function(app) {
     // query.populate('author');
 
     query.exec(function(err, post) {
-      if(err) return next(err);
+      if (err) return next(err);
 
-      if(!post) return next(); // 404
+      if (!post) return next(); // 404
 
       console.log('putting post in view: ' + JSON.stringify(post, null, 2));
       res.render('post/read.jade', { post: post});
     });
   });
 
-  // read
-  // app.get('/post/:id', function(req, res, next) {
-  //   var postid = req.param('id');
-  //   BlogPost.findById(postid, function(err, blogpost) {
-  //     if(err) return next(err);
-  //     if(!blogpost) {
-  //       return res.redirect('/');
-  //     }
-  //     if(blogpost) {
-  //       console.log('putting blogpost in view: ' + JSON.stringify(blogpost, null, 2));
-  //       return res.render('post/read.jade', {post : blogpost});
-  //     }
-  //   });
-  // });
+  // delete
+  app.get('/post/remove/:id', loggedIn, function(req, res, next) {
+    var id = req.param('id');
 
+    BlogPost.findOne({ _id: id}, function(err, post) {
+      if (err) return next(err);
+
+      // validate logged in user authored this post
+      if (post.author != req.session.user) {
+        return res.send(403);
+      }
+
+      post.remove(function(err) {
+        if (err) return next(err);
+
+        // TODO display a confirmation msg to user
+        res.redirect('/');
+      });
+
+    });
+  });
 };
